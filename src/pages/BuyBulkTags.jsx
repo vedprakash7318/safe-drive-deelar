@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useAuth, API_BASE } from '../context/AuthContext';
 import { Search, Filter, X, ChevronRight, ShoppingBag, ArrowLeft, Info, Package } from 'lucide-react';
+import CheckoutModal from '../components/CheckoutModal';
 
 export default function BuyBulkTags() {
   const { token } = useAuth();
@@ -15,6 +16,8 @@ export default function BuyBulkTags() {
   
   // Modal State
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedPackage, setSelectedPackage] = useState(null);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   useEffect(() => {
     fetchProducts();
@@ -36,9 +39,8 @@ export default function BuyBulkTags() {
   };
 
   const handleCheckout = (pkg) => {
-    toast.info(`Selected ${pkg.quantity} pcs. Checkout flow coming soon!`);
-    // Here we'd actually route to a checkout page with state
-    // navigate('/dashboard/checkout', { state: { product: selectedProduct, package: pkg } })
+    setSelectedPackage(pkg);
+    setIsCheckoutOpen(true);
   };
 
   // Derived state for filtering
@@ -301,6 +303,21 @@ export default function BuyBulkTags() {
           scrollbar-width: none;
         }
       `}} />
+      {/* Checkout Modal */}
+      <CheckoutModal 
+        isOpen={isCheckoutOpen} 
+        onClose={() => {
+          setIsCheckoutOpen(false);
+          setSelectedPackage(null);
+        }}
+        product={selectedProduct}
+        pkg={selectedPackage}
+        onSuccess={(order) => {
+          setIsCheckoutOpen(false);
+          setSelectedProduct(null);
+          setSelectedPackage(null);
+        }}
+      />
     </div>
   );
 }
