@@ -4,6 +4,8 @@ import { useAuth } from '../context/AuthContext';
 import { ShieldCheck, LogIn, ArrowRight } from 'lucide-react';
 import { toast } from 'react-toastify';
 
+// done
+
 export default function Login() {
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState('');
@@ -18,7 +20,7 @@ export default function Login() {
       toast.error('Please enter a valid 10-digit phone number');
       return;
     }
-    
+
     setLoading(true);
     try {
       await sendLoginOtp(phone);
@@ -37,7 +39,7 @@ export default function Login() {
       toast.error('Please enter the OTP');
       return;
     }
-    
+
     setLoading(true);
     try {
       await login(phone, otp);
@@ -103,7 +105,7 @@ export default function Login() {
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
                     className="appearance-none block w-full px-3 py-3 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-[#16A34A] focus:border-[#16A34A] text-center text-lg tracking-widest"
-                    placeholder="123456"
+                    placeholder="Enter 6-digit OTP"
                     maxLength={6}
                   />
                 </div>
