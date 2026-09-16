@@ -41,7 +41,7 @@ export default function Header({ onToggleSidebar }) {
               )}
               <p className="text-sm font-black text-slate-900 leading-tight">{dealer?.name || 'Partner'}</p>
             </div>
-            <p className="text-[10px] uppercase font-bold text-slate-400 mt-0.5">{dealer?.shopName || 'Authorized Dealer'}</p>
+            <p className="text-[10px] uppercase font-bold text-slate-400 mt-0.5">{dealer?.shopName || 'Authorized Partner'}</p>
           </div>
           <div className="w-10 h-10 rounded-full bg-emerald-100 border border-emerald-200 text-emerald-700 flex items-center justify-center font-black text-lg shadow-sm">
             {dealer?.name ? dealer.name.charAt(0).toUpperCase() : 'P'}
